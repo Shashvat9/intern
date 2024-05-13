@@ -39,26 +39,26 @@
             return;
         }
         // this will check the data in the request body is null or not
-        if($data['operation']==='create_entry'){
+        if($data['operation']==='createEntry'){
             if($data['id']==null||$data['table_name']==null||$data['email']==null||$data['name']==null){
                 echo send_json(503,"Check the request body.");
                 return;
             }
         }
-        else if($data['operation']==='create_table'){
+        else if($data['operation']==='createTable'){
             if($data['table_name']==null||$data['fealds']==null){
                 echo send_json(503,"Check the request body.");
                 return;
             }
         }
         //this will check the data in request body is empty or not
-        if($data['operation']==='create_entry'){
+        if($data['operation']==='createEntry'){
             if(empty($data['id'])||empty($data['table_name'])||empty($data['email'])||empty($data['name'])){
                 echo send_json(503,"Check the request body.");
                 return;
             }
         }
-        else if($data['operation']==='create_table'){
+        else if($data['operation']==='createTable'){
             if(empty($data['table_name'])||empty($data['fealds'])){
                 echo send_json(503,"Check the request body.");
                 return;
@@ -67,7 +67,7 @@
 
 
         $operation=$data['operation'];
-        if($operation==='create_table'){
+        if($operation==='createTable'){
             $table_name=$data['table_name'];
             $fealds=$data['fealds'];
             $dispacture = new DynamicObjectDispacture($con);
@@ -81,7 +81,7 @@
                 echo send_json($e->getCode(),$e->getMessage());
             }
         }
-        else if ($operation==='create_entry'){
+        else if ($operation==='createEntry'){
             $id=$data['id'];
             $table_name=$data['table_name'];
             $email=$data['email'];
@@ -115,7 +115,7 @@
     // }
     else if($request_methode==='PUT'){
         $data = json_decode(file_get_contents('php://input'), true);
-        $operation="update_entry";
+        $operation="updateEntry";
         //this will check is the request body is empty or not
         if(!isset($data['id'])||!isset($data['table_name'])||!isset($data['data'])){
             echo send_json(503,"Check the request body.");
@@ -171,13 +171,13 @@
         }
 
         //this will check the data in the request body is null or not
-        if($data['operation']==='delete_table'){
+        if($data['operation']==='deleteTable'){
             if(!isset($data['table_name'])){
                 echo send_json(503,"Check the request body.");
                 return;
             }
         }
-        else if($data['operation']==='delete_entry'){
+        else if($data['operation']==='deleteEntry'){
             if(!isset($data['id'])||!isset($data['table_name'])){
                 echo send_json(503,"Check the request body.");
                 return;
@@ -185,13 +185,13 @@
         }
 
         //this will check the data in request body is empty or not
-        if($data['operation']==='delete_table'){
+        if($data['operation']==='deleteTable'){
             if(empty($data['table_name'])){
                 echo send_json(503,"Check the request body.");
                 return;
             }
         }
-        else if($data['operation']==='delete_entry'){
+        else if($data['operation']==='deleteEntry'){
             if(empty($data['id'])||empty($data['table_name'])){
                 echo send_json(503,"Check the request body.");
                 return;
@@ -202,7 +202,7 @@
         $operation=$data['operation'];
 
 
-        if($operation==='delete_table'){
+        if($operation==='deleteTable'){
             if(!isset($data['table_name'])){
                 echo send_json(503,"Check the request body.");
                 return;
@@ -222,7 +222,7 @@
                 echo send_json(504,$e->getMessage().$e->getCode());
             }
         }
-        else if ($operation==='delete_entry'){
+        else if ($operation==='deleteEntry'){
             if(!isset($data['id'])||!isset($data['table_name'])){
                 echo send_json(503,"Check the request body.");
                 return;
@@ -263,13 +263,13 @@
         }
 
         //this will check the data in the request body is null or not
-        if($_GET['operation']==='read_table'){
+        if($_GET['operation']==='readTable'){
             if(!isset($_GET['table_name'])){
                 echo send_json(503,"Check the request body.");
                 return;
             }
         }
-        else if($_GET['operation']==='read_entry'){
+        else if($_GET['operation']==='readEntry'){
             if(!isset($_GET['id'])||!isset($_GET['table_name'])){
                 echo send_json(503,"Check the request body.");
                 return;
@@ -277,13 +277,13 @@
         }
 
         //this will check the data in request body is empty or not
-        if($_GET['operation']==='read_table'){
+        if($_GET['operation']==='readTable'){
             if(empty($_GET['table_name'])){
                 echo send_json(503,"Check the request body.");
                 return;
             }
         }
-        else if($_GET['operation']==='read_entry'){
+        else if($_GET['operation']==='readEntry'){
             if(empty($_GET['id'])||empty($_GET['table_name'])){
                 echo send_json(503,"Check the request body.");
                 return;
@@ -293,7 +293,7 @@
         
 
         $operation=$_GET['operation'];
-        if($operation==='read_table'){
+        if($operation==='readTable'){
             $table_name=$_GET['table_name'];
             $dispacture = new DynamicObjectDispacture($con);
             try{
@@ -309,7 +309,7 @@
                 echo send_json(504,$e->getMessage().$e->getCode());
             }
         }
-        else if ($operation==='read_entry'){
+        else if ($operation==='readEntry'){
             $id=$_GET['id'];
             $table_name=$_GET['table_name'];
             $dispacture = new DynamicObjectDispacture($con);

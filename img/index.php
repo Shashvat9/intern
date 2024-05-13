@@ -13,12 +13,12 @@
     if($_SERVER["REQUEST_METHOD"]=="POST"){
         //this will check if the perameaters are empty
         if(empty($_FILES["img"]["name"])){
-            send_json(105,"error","Please select a file to upload.");
+            sendJson(105,"error","Please select a file to upload.");
             return;
         }
         //this will check if the perameaters are null
         if($_FILES["img"]["name"]==null){
-            send_json(105,"error","Please select a file to upload.");
+            sendJson(105,"error","Please select a file to upload.");
             return;
         }
         // echo $_POST["img"];
@@ -32,13 +32,13 @@
         $filename=$file_mani->uplode("img",$allowd_ext,$file_destination_path,$file_seze,$file_name);
 
         if($filename==101){
-            send_json(101,"error","This is too large file.");
+            sendJson(101,"error","This is too large file.");
         }
         else if($filename==102){
-            send_json(102,"error","There is a error in file uplode please try again.");
+            sendJson(102,"error","There is a error in file uplode please try again.");
         }
         else if($filename==103){
-            send_json(103,"error","This file type is not allowed please enter a valid file type.");
+            sendJson(103,"error","This file type is not allowed please enter a valid file type.");
         }
         else{
             $filearr=explode(",",$filename);
@@ -46,9 +46,9 @@
             $file_name=$filearr[0];
             $sql="INSERT INTO image (name,format) VALUES ('$file_name','$fileext')";
             if ($conn->query($sql) === TRUE) {
-                send_json(200,"success","file has uploaded with the name of ".$filename);
+                sendJson(200,"success","file has uploaded with the name of ".$filename);
             } else {
-                send_json(104,"error","There is a error in file uplode please try again.");
+                sendJson(104,"error","There is a error in file uplode please try again.");
             }
         }
     }
@@ -59,7 +59,7 @@
     // }
 
 
-    function send_json($code,$status,$message){
+    function sendJson($code,$status,$message){
         $response = array(
             "code" => $code,
             "status" => $status,

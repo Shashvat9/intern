@@ -5,7 +5,7 @@ class Delete extends DeleteExeption{
         $this->con = $con;
     }
     
-    public function delete_entry($id,$table_name):bool {
+    public function deleteEntry($id,$table_name):bool {
         $delete = $this->con->prepare("DELETE FROM $table_name WHERE id = ?");
         $delete->bind_param("i", $id);
         try{
@@ -17,7 +17,7 @@ class Delete extends DeleteExeption{
         return $flag;
     }
 
-    public function delete_table($name):bool {
+    public function deleteTable($name):bool {
         $delete = $this->con->prepare("DELETE FROM $name");
         $flag=$delete->execute();
         if(!$flag)

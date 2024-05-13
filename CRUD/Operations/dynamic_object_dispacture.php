@@ -16,44 +16,44 @@ class DynamicObjectDispacture extends GeneralExeption{
         $json=0;
         switch ($operation) {
             //Create oprations
-            case 'create_entry':
+            case 'createEntry':
                 $create = new Create($this->con);
-                return $create->create_entry($table_name,$id,$data_create['email'],$data_create['name']);
+                return $create->createEntry($table_name,$id,$data_create['email'],$data_create['name']);
                 break;
-            case 'create_table':
+            case 'createTable':
                 $create = new Create($this->con);
                 if($fealds==0)
                     throw new GeneralExeption("There is no name of Collum names provided in the arguments.",501);
                 else
                     // echo $fealds; 
-                    return $create->create_table($table_name,$fealds);
+                    return $create->createTable($table_name,$fealds);
                     break;
 
             //Read operations
-            case 'read_entry':
+            case 'readEntry':
                 $read = new Read($this->con);
-                return $read->read_entry($id,$table_name);
+                return $read->readEntry($id,$table_name);
                 break;
-            case 'read_table':
+            case 'readTable':
                 $read = new Read($this->con);
-                return $read->read_table($table_name);
+                return $read->readTable($table_name);
                 break;
                 
             
             //Update operations
-            case 'update_entry':
+            case 'updateEntry':
                 $update = new Update($this->con);
-                return $update->update_entry($id,$table_name,$data_update);
+                return $update->updateEntry($id,$table_name,$data_update);
                 break;
 
             //Delete operations
-            case 'delete_entry':
+            case 'deleteEntry':
                 $delete = new Delete($this->con);
-                return $delete->delete_entry($id,$table_name);
+                return $delete->deleteEntry($id,$table_name);
                 break;
-            case 'delete_table':
+            case 'deleteTable':
                 $delete = new Delete($this->con);
-                return $delete->delete_table($table_name);
+                return $delete->deleteTable($table_name);
                 break;
             default:
                 throw new GeneralExeption("Operation not found",502);

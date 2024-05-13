@@ -6,7 +6,7 @@
             $this->con = $con;
         }
         
-        public function read_entry($id, $table_name): array {
+        public function readEntry($id, $table_name): array {
             $read = $this->con->prepare("SELECT * FROM $table_name WHERE id = ?");
             $read->bind_param("i", $id);
             $flag = $read->execute();
@@ -20,7 +20,7 @@
             }
         }    
 
-        public function read_table($name): array {
+        public function readTable($name): array {
             $read = $this->con->prepare("SELECT * FROM $name");
             $flag = $read->execute();
 

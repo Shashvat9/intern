@@ -7,7 +7,7 @@ require_once 'Exceptions.php';
 
         }
         
-        public function create_entry($table_name, $id, $email, $name): bool {
+        public function createEntry($table_name, $id, $email, $name): bool {
             try{
                 $query = "INSERT INTO $table_name (`id`,`email`,`name`) VALUES (?,?,?)";
                 $create = $this->con->prepare($query);
@@ -19,7 +19,7 @@ require_once 'Exceptions.php';
             }
             return $flag;
         }
-        public function create_table($name,$fields): bool{
+        public function createTable($name,$fields): bool{
             $create="";
             $sql="CREATE TABLE $name ($fields)";
             // echo $sql; 

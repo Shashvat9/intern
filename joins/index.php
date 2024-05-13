@@ -15,7 +15,7 @@ class Join{
     public function __construct($conn){
         $this->conn = $conn;
     }
-    public function inner_join($table1,$table2){
+    public function innerJoin($table1,$table2){
         $query = "SELECT * FROM $table1 INNER JOIN $table2 ON $table1.did = $table2.did;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -26,7 +26,7 @@ class Join{
         }
         return json_encode($data,true);
     }
-    public function left_join($table1,$table2){
+    public function leftJoin($table1,$table2){
         $query = "SELECT * FROM $table1 LEFT JOIN $table2 ON $table1.did = $table2.did;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -37,7 +37,7 @@ class Join{
         }
         return json_encode($data,true);
     }
-    public function right_join($table1,$table2){
+    public function rightJoin($table1,$table2){
         $query = "SELECT * FROM $table1 RIGHT JOIN $table2 ON $table1.did = $table2.did;;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -49,7 +49,7 @@ class Join{
         return json_encode($data,true);
     }
 
-    public function outer_join($table1,$table2){
+    public function outerJoin($table1,$table2){
         $query = "SELECT * FROM test 
                     LEFT JOIN test2 ON $table1.did = $table2.did
                     UNION 
@@ -85,17 +85,17 @@ if($_SERVER["REQUEST_METHOD"]==="GET"){
     $operation = $_GET['operation'];
     $join = new Join($conn);
 
-    if($operation==='inner_join'){
-        echo $join->inner_join($table1,$table2);
+    if($operation==='innerJoin'){
+        echo $join->innerJoin($table1,$table2);
     }
-    else if($operation==='left_join'){
-        echo $join->left_join($table1,$table2);
+    else if($operation==='leftJoin'){
+        echo $join->leftJoin($table1,$table2);
     }
-    else if($operation==='right_join'){
-        echo $join->right_join($table1,$table2);
+    else if($operation==='rightJoin'){
+        echo $join->rightJoin($table1,$table2);
     }
-    else if($operation==='outer_join'){
-        echo $join->outer_join($table1,$table2);
+    else if($operation==='outerJoin'){
+        echo $join->outerJoin($table1,$table2);
     }
     else{
         echo "Invalid operation";
