@@ -31,7 +31,7 @@
     if($request_methode==='POST'){
         $data = json_decode(file_get_contents('php://input'), true);
 
-        print_r($data);
+        // print_r($data);
 
         //this will check is the request body is empty or not
         if(!isset($data['operation'])||!isset($data['table_name'])||!isset($data['id'])||!isset($data['email'])||!isset($data['name'])){

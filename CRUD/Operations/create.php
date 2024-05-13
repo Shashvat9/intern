@@ -28,6 +28,7 @@ require_once 'Exceptions.php';
                 $flag = $create->execute();
             }
             catch(Exception $e){
+                // echo $e->getMessage();
                 throw new CreateExeption("Error creating table",102);
             }
             return $flag;
