@@ -49,10 +49,24 @@ $find = new FindNull();
 // }
 if($_SERVER['REQUEST_METHOD'] == 'PUT'){
     $data = json_decode(file_get_contents('php://input'), true);
+    //this will check if the json is valid
     if(!isset($data['operation']) || !isset($data['id']) || !isset($data['table']) || !isset($data['data'])) {
         send__json(400,"Invalid JSON","");  
         return;
     }
+
+    //this will check if the perameaters are empty
+    if(empty($data['operation']) || empty($data['id']) || empty($data['table']) || empty($data['data'])) {
+        send__json(400,"Empty parameters","");  
+        return;
+    }
+
+    //this will check if the perameaters are null 
+    if($data['operation'] == null || $data['id'] == null || $data['table'] == null || $data['data'] == null) {
+        send__json(400,"Null parameters","");  
+        return;
+    }
+    
     $operation=$data['operation'];
     if($operation==='put_value'){
         $id=$data['id'];

@@ -11,7 +11,13 @@
         die("Connection failed: " . $conn->connect_error);
     }
     if($_SERVER["REQUEST_METHOD"]=="POST"){
+        //this will check if the perameaters are empty
         if(empty($_FILES["img"]["name"])){
+            send_json(105,"error","Please select a file to upload.");
+            return;
+        }
+        //this will check if the perameaters are null
+        if($_FILES["img"]["name"]==null){
             send_json(105,"error","Please select a file to upload.");
             return;
         }

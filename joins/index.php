@@ -68,10 +68,18 @@ class Join{
 
 if($_SERVER["REQUEST_METHOD"]==="GET"){
     
+    //this will check if the perameaters are empty
     if(!isset($_GET['table1']) || !isset($_GET['table2']) || !isset($_GET['operation'])){
         echo "Invalid perameters";
         return;
     }
+
+    //this will check if the perameaters are null
+    if($_GET['table1']==null || $_GET['table2']==null || $_GET['operation']==null){
+        echo "Invalid perameters";
+        return;
+    }
+
     $table1 = $_GET['table1'];
     $table2 = $_GET['table2'];
     $operation = $_GET['operation'];
