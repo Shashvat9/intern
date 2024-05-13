@@ -36,7 +36,6 @@
         //this will check is the request body is empty or not
         if(!isset($data['operation'])||!isset($data['table_name'])||!isset($data['id'])||!isset($data['email'])||!isset($data['name'])){
             echo send_json(503,"Check the request body.");
-            // echo "operation : ".$data['operation']."<br>";
             return;
         }
         // this will check the data in the request body is null or not
