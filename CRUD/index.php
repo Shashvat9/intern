@@ -31,12 +31,41 @@
     if($request_methode==='POST'){
         $data = json_decode(file_get_contents('php://input'), true);
 
-        // print_r($data);
+        print_r($data);
+
+        //this will check is the request body is empty or not
         if(!isset($data['operation'])||!isset($data['table_name'])||!isset($data['id'])||!isset($data['email'])||!isset($data['name'])){
             echo send_json(503,"Check the request body.");
             // echo "operation : ".$data['operation']."<br>";
             return;
         }
+        // this will check the data in the request body is null or not
+        if($data['operation']==='create_entry'){
+            if($data['id']==null||$data['table_name']==null||$data['email']==null||$data['name']==null){
+                echo send_json(503,"Check the request body.");
+                return;
+            }
+        }
+        else if($data['operation']==='create_table'){
+            if($data['table_name']==null||$data['fealds']==null){
+                echo send_json(503,"Check the request body.");
+                return;
+            }
+        }
+        //this will check the data in request body is empty or not
+        if($data['operation']==='create_entry'){
+            if(empty($data['id'])||empty($data['table_name'])||empty($data['email'])||empty($data['name'])){
+                echo send_json(503,"Check the request body.");
+                return;
+            }
+        }
+        else if($data['operation']==='create_table'){
+            if(empty($data['table_name'])||empty($data['fealds'])){
+                echo send_json(503,"Check the request body.");
+                return;
+            }
+        }
+
 
         $operation=$data['operation'];
         if($operation==='create_table'){
@@ -93,10 +122,24 @@
     else if($request_methode==='PUT'){
         $data = json_decode(file_get_contents('php://input'), true);
         $operation="update_entry";
+        //this will check is the request body is empty or not
         if(!isset($data['id'])||!isset($data['table_name'])||!isset($data['data'])){
             echo send_json(503,"Check the request body.");
             return;
         }
+
+        //this will check the data in the request body is null or not
+        if($data['id']==null||$data['table_name']==null||$data['data']==null){
+            echo send_json(503,"Check the request body.");
+            return;
+        }
+
+        //this will check the data in request body is empty or not
+        if(empty($data['id'])||empty($data['table_name'])||empty($data['data'])){
+            echo send_json(503,"Check the request body.");
+            return;
+        }
+
         $id=$data['id'];
         $table_name=$data['table_name'];
         $data=$data['data'];
@@ -126,10 +169,42 @@
 
     else if($request_methode==='DELETE'){
         $data = json_decode(file_get_contents('php://input'), true);
+
+        //this will check is the request body is empty or not
         if(!isset($data['operation'])){
             echo send_json(503,"Operation not fild found for DELETE method.");
             return;
         }
+
+        //this will check the data in the request body is null or not
+        if($data['operation']==='delete_table'){
+            if(!isset($data['table_name'])){
+                echo send_json(503,"Check the request body.");
+                return;
+            }
+        }
+        else if($data['operation']==='delete_entry'){
+            if(!isset($data['id'])||!isset($data['table_name'])){
+                echo send_json(503,"Check the request body.");
+                return;
+            }
+        }
+
+        //this will check the data in request body is empty or not
+        if($data['operation']==='delete_table'){
+            if(empty($data['table_name'])){
+                echo send_json(503,"Check the request body.");
+                return;
+            }
+        }
+        else if($data['operation']==='delete_entry'){
+            if(empty($data['id'])||empty($data['table_name'])){
+                echo send_json(503,"Check the request body.");
+                return;
+            }
+        }
+
+
         $operation=$data['operation'];
 
 
@@ -192,6 +267,37 @@
             echo send_json(503,"Operation not found for GET method.");
             return;
         }
+
+        //this will check the data in the request body is null or not
+        if($_GET['operation']==='read_table'){
+            if(!isset($_GET['table_name'])){
+                echo send_json(503,"Check the request body.");
+                return;
+            }
+        }
+        else if($_GET['operation']==='read_entry'){
+            if(!isset($_GET['id'])||!isset($_GET['table_name'])){
+                echo send_json(503,"Check the request body.");
+                return;
+            }
+        }
+
+        //this will check the data in request body is empty or not
+        if($_GET['operation']==='read_table'){
+            if(empty($_GET['table_name'])){
+                echo send_json(503,"Check the request body.");
+                return;
+            }
+        }
+        else if($_GET['operation']==='read_entry'){
+            if(empty($_GET['id'])||empty($_GET['table_name'])){
+                echo send_json(503,"Check the request body.");
+                return;
+            }
+        }
+
+        
+
         $operation=$_GET['operation'];
         if($operation==='read_table'){
             $table_name=$_GET['table_name'];
