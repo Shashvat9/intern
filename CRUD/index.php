@@ -69,11 +69,6 @@
 
         $operation=$data['operation'];
         if($operation==='create_table'){
-            // if(!isset($data['fealds'])){
-            //     echo send_json(503,"Check the request body.");
-            //     print_r($data);
-            //     return;
-            // }
             $table_name=$data['table_name'];
             $fealds=$data['fealds'];
             $dispacture = new DynamicObjectDispacture($con);
