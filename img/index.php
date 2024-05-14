@@ -53,19 +53,9 @@
             else{
                 sendJson(104,"error","There is a error in file uplode please try again.");
             }
-
-            // if ($conn->query($sql) === TRUE) {
-            //     sendJson(200,"success","file has uploaded with the name of ".$filename);
-            // } else {
-            //     sendJson(104,"error","There is a error in file uplode please try again.");
-            // }
         }
     }
 
-    // function get_last_key($array){
-    //     end($array);
-    //     return key($array);
-    // }
 
 
     function sendJson($code,$status,$message){

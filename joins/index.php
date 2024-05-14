@@ -38,7 +38,7 @@ class Join{
         return json_encode($data,true);
     }
     public function rightJoin($table1,$table2){
-        $query = "SELECT * FROM $table1 RIGHT JOIN $table2 ON $table1.did = $table2.did;;";
+        $query = "SELECT * FROM $table1 RIGHT JOIN $table2 ON $table1.did = $table2.did;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->get_result();
