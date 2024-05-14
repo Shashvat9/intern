@@ -21,11 +21,14 @@ require_once 'Exceptions.php';
         }
         public function createTable($name,$fields): bool{
             $create="";
-            $sql="CREATE TABLE $name ($fields)";
+            $sql="CREATE TABLE $name (?);";
             // echo $sql; 
             try{
                 $create = $this->con->prepare($sql);
+                $create->bind_param("s", $fields);
                 $flag = $create->execute();
+                // $create = $this->con->prepare($sql);
+                // $flag = $create->execute();
             }
             catch(Exception $e){
                 // echo $e->getMessage();

@@ -18,8 +18,10 @@ class Delete extends DeleteExeption{
     }
 
     public function deleteTable($name):bool {
-        $delete = $this->con->prepare("DELETE FROM $name");
+        $delete = $this->con->prepare("DELETE FROM ?");
+        $delete->bind_param("s", $name);
         $flag=$delete->execute();
+        // $flag=$delete->execute();
         if(!$flag)
             throw new DeleteExeption("Error deleting entry",402);
         else

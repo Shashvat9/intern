@@ -21,7 +21,8 @@
         }    
 
         public function readTable($name): array {
-            $read = $this->con->prepare("SELECT * FROM $name");
+            $read = $this->con->prepare("SELECT * FROM ?");
+            $read->bind_param("s", $name);
             $flag = $read->execute();
 
             if (!$flag) {

@@ -18,8 +18,6 @@ if ($conn->connect_error) {
             $stmt->bind_param("s", $searchTerm);
             $stmt->execute();
             $result = $stmt->get_result();
-            // $stmt->execute();
-            // $result = $stmt->get_result();
             $data = array();
 
             //it will check if there is no data in the database

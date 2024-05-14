@@ -34,8 +34,12 @@ class FindNull {
 
     public function fillNull($conn,$id,$table,$nullarr,$data){
         for($i=0;$i<count($nullarr);$i++) {
-            $sql = "UPDATE $table SET $nullarr[$i] = '$data' WHERE id = $id";
-            $conn-> query($sql);
+            $sql = "UPDATE $table SET $nullarr[$i] = '$data' WHERE id = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            
+            // $conn-> query($sql);
         }
     }
 }
