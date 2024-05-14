@@ -44,12 +44,21 @@
             $filearr=explode(",",$filename);
             $fileext=$filearr[1];
             $file_name=$filearr[0];
-            $sql="INSERT INTO image (name,format) VALUES ('$file_name','$fileext')";
-            if ($conn->query($sql) === TRUE) {
-                sendJson(200,"success","file has uploaded with the name of ".$filename);
-            } else {
+            $sql="INSERT INTO image (name,format) VALUES (?,?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ss", $file_name,$fileext);
+            if($stmt->execute()){
+                sendJson(200,"success","file has uploaded with the name of ".$file_name);
+            }
+            else{
                 sendJson(104,"error","There is a error in file uplode please try again.");
             }
+
+            // if ($conn->query($sql) === TRUE) {
+            //     sendJson(200,"success","file has uploaded with the name of ".$filename);
+            // } else {
+            //     sendJson(104,"error","There is a error in file uplode please try again.");
+            // }
         }
     }
 

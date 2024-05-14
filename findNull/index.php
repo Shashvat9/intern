@@ -12,8 +12,11 @@ if ($conn->connect_error) {
 
 class FindNull {
     public function findNull($conn,$id,$table) {
-        $sql = "SELECT * FROM $table WHERE id = $id";
-        $result = $conn->query($sql);
+        $sql = "SELECT * FROM $table WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             $row_assoc=$result->fetch_assoc();
             reset($row_assoc);

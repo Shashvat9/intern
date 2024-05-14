@@ -12,10 +12,14 @@ if ($conn->connect_error) {
   }
     class Search{
         public function search($table,$column,$value,$conn){
-            $query = "SELECT * FROM $table WHERE $column LIKE '%$value%'";
+            $searchTerm = "%".$value."%";
+            $query = "SELECT * FROM $table WHERE $column LIKE ?";
             $stmt = $conn->prepare($query);
+            $stmt->bind_param("s", $searchTerm);
             $stmt->execute();
             $result = $stmt->get_result();
+            // $stmt->execute();
+            // $result = $stmt->get_result();
             $data = array();
 
             //it will check if there is no data in the database
